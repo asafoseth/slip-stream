@@ -1,0 +1,69 @@
+PROJECT: SlipStream
+
+A great project name that reflects the purpose and the learning experience could be "SlipStream". This name ties into the idea of streamlining data collection and management, especially with the use of payment slips.
+
+Technologies Involved
+
+Backend (API)
+Node.js: JavaScript runtime for building the API server.
+Express.js: Web framework for handling routes and middleware.
+MongoDB (or PostgreSQL/MySQL): Database for storing collected data.
+Mongoose (for MongoDB) or Sequelize (for SQL databases): ORM for database interactions.
+JWT: JSON Web Tokens for authentication (if needed).
+Dotenv: To manage environment variables.
+Nodemon: For auto-restarting the server during development.
+Cors: To handle cross-origin requests.
+
+Mobile App
+React Native: Framework for building the mobile app.
+AsyncStorage: For local storage of data within the mobile app.
+Axios: For making API requests.
+React Navigation: For navigating between screens in the app.
+
+Web Dashboard
+SvelteKit: Framework for building the web dashboard.
+Axios: For making API requests from the dashboard.
+Tailwind CSS (optional): For styling the dashboard components.
+Svelte Stores: For state management within the Svelte app.
+Sapper (if SSR is needed): For server-side rendering.
+
+Additional Tools
+Postman: For testing API endpoints.
+Git/GitHub: Version control and collaboration.
+Docker (optional): For containerizing the application.
+Heroku/Vercel (or any cloud service): For deploying the API and web dashboard.
+
+This stack will not only help you learn new technologies but also provide you with hands-on experience in full-stack development, covering everything from backend API creation to mobile and web app development. 
+
+----------------------------------------------------------------------------------------------------------
+Building a simple system which has two components 
+
+1. A mobile app section in React Native
+2. A Web Dashboard in Svelte Kit
+
+
+The Mobile App is used for collecting data so it will have a form that takes data, stores a copy in-app and transmits it to the database via an API
+
+The Dashboard section also reads this data via the API, it can also perform all READ, EDIT, DELETE etc actions on the data via the API 
+
+How do we go about this project?
+What's the structure of the project going to be like?
+What database will be suitable for this?
+Will Svelte be good for API development? 
+What resources will be needed?
+
+Data Collection Fields:
+Customer Name
+Location
+Account Number
+Time In
+Time Out
+No. of Cash Slips
+No. of Cheque Slips
+Cash Amount
+Cheque Amount
+Total Amount
+Depositors Name
+Depositors Signature
+Contact Number
+Image of Payment Slip
