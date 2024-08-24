@@ -1,8 +1,7 @@
-// components/FormScreen.tsx
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, Alert, ActivityIndicator } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-import DateTimePicker from '@react-native-community/datetimepicker'; // Import DateTimePicker
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function FormScreen() {
   const [form, setForm] = useState({
@@ -21,6 +20,8 @@ export default function FormScreen() {
     contactNumber: '',
   });
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [showTimeInPicker, setShowTimeInPicker] = useState(false);
   const [showTimeOutPicker, setShowTimeOutPicker] = useState(false);
 
@@ -28,13 +29,50 @@ export default function FormScreen() {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = () => {
-    console.log(form);
-    // Here you would handle form submission
+  const handleSubmit = async () => {
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('https://slip-stream-api-5188d417eed2.herokuapp.com/api/data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
+      Alert.alert('Success', 'Form submitted successfully!');
+      setForm({
+        customerName: '',
+        location: '',
+        accountNumber: '',
+        timeIn: new Date(),
+        timeOut: new Date(),
+        cashSlips: '',
+        chequeSlips: '',
+        cashAmount: '',
+        chequeAmount: '',
+        totalAmount: '',
+        depositorName: '',
+        depositorSignature: '',
+        contactNumber: '',
+      });
+    } catch (error: any) {
+      setError(error.message || 'Something went wrong!');
+      Alert.alert('Error', error.message || 'Something went wrong!');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <ScrollView style={styles.container}>
+      {error ? <Text style={styles.error}>{error}</Text> : null}
       <TextInput
         label="Customer Name"
         value={form.customerName}
@@ -133,9 +171,14 @@ export default function FormScreen() {
         onChangeText={(text) => handleInputChange('contactNumber', text)}
         style={styles.input}
       />
-      <Button mode="contained" onPress={handleSubmit} style={styles.submitButton}>
-        Submit
-      </Button>
+
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <Button mode="contained" onPress={handleSubmit} style={styles.submitButton}>
+          Submit
+        </Button>
+      )}
     </ScrollView>
   );
 }
@@ -153,5 +196,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 50,
   },
+  error: {
+    color: 'red',
+    marginBottom: 20,
+  },
 });
-

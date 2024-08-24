@@ -67,3 +67,12 @@ Depositors Name
 Depositors Signature
 Contact Number
 Image of Payment Slip
+
+
+--------------------------------------------------
+
+https://slip-stream-api-5188d417eed2.herokuapp.com/
+
+
+
+
